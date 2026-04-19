@@ -5,7 +5,7 @@ namespace HelloWorld
 {
     public class HelloWorldPlayer : NetworkBehaviour
     {
-        public NetworkVariable<Vector2> Position = new NetworkVariable<Vector2>();
+        public NetworkVariable<Vector3> Position = new NetworkVariable<Vector3>();
 
         public override void OnNetworkSpawn()
         {
@@ -22,7 +22,7 @@ namespace HelloWorld
             Position.OnValueChanged -= OnStateChanged;
         }
 
-        public void OnStateChanged(Vector2 previous, Vector2 current)
+        public void OnStateChanged(Vector3 previous, Vector3 current)
         {
             // note: `Position.Value` will be equal to `current` here
             if (Position.Value != previous)
@@ -44,9 +44,9 @@ namespace HelloWorld
             Position.Value = randomPosition;
         }
 
-        static Vector2 GetRandomPositionOnPlane()
+        static Vector3 GetRandomPositionOnPlane()
         {
-            return new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
+            return new Vector3(Random.Range(-3f, 3f), 1f, Random.Range(-3f, 3f));
         }
     }
 }
